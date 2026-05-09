@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>F1 Management | Drivers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="bg-dark text-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-danger mb-4">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">F1 <span class="text-danger">SYSTEM</span></a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="/">Dashboard</a>
+                <a class="nav-link active" href="/drivers-page">Drivers</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="text-uppercase fw-black mb-4">Manage <span class="text-danger">Drivers</span></h2>
+
+        <div class="card bg-black text-white border-secondary mb-5">
+            <div class="card-body">
+                <h5 class="card-title text-danger">Register New Driver</h5>
+                <form action="/drivers/add" method="post" class="row g-3">
+                    <div class="col-md-3">
+                        <label class="form-label text-secondary small">First Name</label>
+                        <input type="text" name="first_name" class="form-control bg-dark text-white border-secondary" placeholder="First Name" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-secondary small">Last Name</label>
+                        <input type="text" name="last_name" class="form-control bg-dark text-white border-secondary" placeholder="Last Name" required>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label text-secondary small">Driver Code</label>
+                        <input type="text" name="driver_code" class="form-control bg-dark text-white border-secondary" placeholder="Code (e.g. HAM)" required>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label text-secondary small">Number</label>
+                        <input type="number" name="permanent_number" class="form-control bg-dark text-white border-secondary" placeholder="Number" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-secondary small">Team</label>
+                        <select name="team_id" class="form-control bg-dark text-white border-secondary">
+                            <option value="">No Team (Free Agent)</option>
+                            {% for team in teams %}
+                            <option value="{{ team.id }}">{{ team.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label d-block">&nbsp;</label> <button type="submit" class="btn btn-danger w-100 fw-bold" style="height: 38px;">
+                            ADD DRIVER
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <table class="table table-dark table-hover border-secondary">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for driver in drivers %}
+                <tr>
+                    <td>{{ driver.permanent_number }}</td>
+                    <td class="fw-bold">{{ driver.first_name }} {{ driver.last_name }}</td>
+                    <td><span class="badge bg-secondary">{{ driver.driver_code }}</span></td>
+                    <td>
+                        <form action="/drivers/delete/{{ driver.id }}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
