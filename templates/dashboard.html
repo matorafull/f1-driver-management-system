@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4 fw-bold">Аналитика сезона</h2>
+
+<div class="row g-4 mb-5">
+    {% for team in stats %}
+    <div class="col-md-4">
+        <div class="card h-100 border-start border-danger border-4">
+            <div class="card-body">
+                <h5 class="text-secondary small text-uppercase fw-bold">{{ team.team_name }}</h5>
+                <h2 class="display-6 fw-bold mb-0">{{ team.total_points }} <span class="fs-6 text-secondary">PTS</span></h2>
+                <hr class="border-secondary">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="small text-secondary">Эффективность:</span>
+                    <span class="badge bg-success">${{ "{:,.0f}".format(team.cost_per_point) }} / очко</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="mb-3">Детальная статистика команд</h4>
+        <div class="card overflow-hidden">
+            <table class="table table-dark table-striped mb-0">
+                <thead>
+                    <tr>
+                        <th>Место</th>
+                        <th>Команда</th>
+                        <th class="text-center">Всего очков</th>
+                        <th class="text-center">Подиумы</th>
+                        <th class="text-end">Инвестиции на 1 очко</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in stats %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td class="fw-bold">{{ s.team_name }}</td>
+                        <td class="text-center text-danger fw-bold">{{ s.total_points }}</td>
+                        <td class="text-center">{{ s.total_podiums }}</td>
+                        <td class="text-end text-info">${{ "{:,.0f}".format(s.cost_per_point) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" class="text-danger">Главная</a></li>
+                <li class="breadcrumb-item active text-white" aria-current="page">Статистика пилота</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card bg-dark text-white shadow-lg border-0 h-100">
+            <div class="card-body text-center p-5">
+                <div class="display-1 fw-bold text-danger mb-2">#{{ driver.driver_number }}</div>
+                <h2 class="fw-bold mb-0">{{ driver.full_name }}</h2>
+                <p class="text-secondary mb-4">{{ driver.country or 'International' }}</p>
+
+                <div class="border-top border-secondary pt-4 mt-2">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-secondary">Команда:</span>
+                        <span class="fw-bold">{{ driver.team_name }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span class="text-secondary">Болид:</span>
+                        <span class="fw-bold">{{ driver.car_model }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card bg-danger text-white text-center p-3 shadow-sm border-0">
+                    <small class="text-uppercase opacity-75">Старты</small>
+                    <h3 class="fw-bold mb-0">{{ summary.total_starts or 0 }}</h3>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-dark text-white text-center p-3 shadow-sm border-0 border-bottom border-warning border-4">
+                    <small class="text-uppercase text-secondary">Победы</small>
+                    <h3 class="fw-bold mb-0 text-warning">{{ summary.wins or 0 }}</h3>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-dark text-white text-center p-3 shadow-sm border-0 border-bottom border-light border-4">
+                    <small class="text-uppercase text-secondary">Подиумы</small>
+                    <h3 class="fw-bold mb-0">{{ summary.podiums or 0 }}</h3>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-primary text-white text-center p-3 shadow-sm border-0">
+                    <small class="text-uppercase opacity-75">Всего очков</small>
+                    <h3 class="fw-bold mb-0">{{ summary.total_points or 0 }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="card bg-dark text-white shadow-sm border-0">
+            <div class="card-header bg-secondary bg-opacity-25 py-3">
+                <h5 class="mb-0"><i class="fa fa-history me-2 text-danger"></i>История результатов</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark table-hover mb-0">
+                    <thead>
+                        <tr class="text-secondary small text-uppercase">
+                            <th>Дата</th>
+                            <th>Гран-при</th>
+                            <th class="text-center">Позиция</th>
+                            <th class="text-end">Очки</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for race in history %}
+                        <tr>
+                            <td>{{ race.race_date }}</td>
+                            <td class="fw-bold">{{ race.race_name }}</td>
+                            <td class="text-center">
+                                {% if race.position == 1 %}
+                                    <span class="badge bg-warning text-dark">P1</span>
+                                {% else %}
+                                    P{{ race.position }}
+                                {% endif %}
+                            </td>
+                            <td class="text-end text-info fw-bold">+{{ race.points_earned }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% if not history %}
+                        <tr>
+                            <td colspan="4" class="text-center py-5 text-secondary">Пилот еще не участвовал в гонках</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

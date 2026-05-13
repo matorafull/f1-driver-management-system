@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <h3 class="mb-4 text-danger"><i class="fa fa-map-location-dot me-2"></i>Новая трасса</h3>
+        <div class="card p-4 shadow-sm bg-dark text-white border-0">
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label text-secondary small fw-bold">НАЗВАНИЕ АВТОДРОМА</label>
+                    <input type="text" name="name" class="form-control bg-dark text-white border-secondary" placeholder="Circuit de Spa-Francorchamps" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-secondary small fw-bold">СТРАНА</label>
+                    <input type="text" name="country" class="form-control bg-dark text-white border-secondary" placeholder="Belgium" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-secondary small fw-bold">ДЛИНА КРУГА (КМ)</label>
+                    <input type="number" step="0.001" name="length" class="form-control bg-dark text-white border-secondary" placeholder="7.004" required>
+                </div>
+                <button type="submit" class="btn btn-danger w-100 fw-bold mt-2">ДОБАВИТЬ В БАЗУ</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <h3 class="mb-4">География чемпионата</h3>
+        <div class="card shadow-sm border-0 overflow-hidden">
+            <table class="table table-dark table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Трасса</th>
+                        <th>Страна</th>
+                        <th class="text-end">Дистанция круга</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in circuits %}
+                    <tr class="align-middle">
+                        <td class="fw-bold text-danger">{{ c.circuit_name }}</td>
+                        <td><i class="fa fa-location-dot me-2 text-secondary"></i>{{ c.country }}</td>
+                        <td class="text-end text-info">{{ c.length_km }} км</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
