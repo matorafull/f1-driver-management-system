@@ -21,7 +21,7 @@
 
 ### 1. 1. Клонирование репозитория
 ```bash
-git clone https://github.com/ВашАккаунт/f1-management-system
+git clone https://github.com/matorafull/f1-driver-management-system
 cd f1-management-system
 ```
 
