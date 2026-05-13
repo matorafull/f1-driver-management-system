@@ -7,7 +7,7 @@ def get_db_connection():
         host="localhost",
         database="f1_racing_db",
         user="postgres",
-        password="dexter553",
+        password="postgres",            # Поменяйте пароль
         cursor_factory=RealDictCursor
     )
     return conn

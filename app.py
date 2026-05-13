@@ -6,7 +6,6 @@ app = Flask(__name__)
 app.secret_key = 'f1_secret_key'
 
 
-# --- 1. ПИЛОТЫ И КОМАНДЫ (Вместо витрины) ---
 @app.route('/')
 def drivers_list():
     search = request.args.get('search', '')
@@ -27,13 +26,10 @@ def drivers_list():
     return render_template('drivers.html', drivers=drivers, teams=teams)
 
 
-# --- 2. ДАШБОРД (Турнирная таблица) ---
 @app.route('/dashboard')
 def dashboard():
-    # Данные из SQL View (Очки команд и эффективность бюджета)
     stats = execute_query("SELECT * FROM view_team_standings", fetch=True)
 
-    # Топ пилотов по очкам
     top_drivers = execute_query("""
         SELECT d.full_name, SUM(rr.points_earned) as total_points 
         FROM drivers d 
@@ -45,7 +41,6 @@ def dashboard():
 
 
 
-# Обработка формы
 @app.route('/submit_result', methods=['POST'])
 def submit_result():
     race_id = request.form.get('race_id')
@@ -53,7 +48,6 @@ def submit_result():
     position = request.form.get('position')
     points = request.form.get('points')
 
-    # Автоматически находим car_id для этого пилота, чтобы не вводить вручную
     car_data = execute_query(
         "SELECT car_id FROM cars WHERE team_id = (SELECT team_id FROM drivers WHERE driver_id = %s)", (driver_id,),
         fetch=True)
@@ -74,10 +68,8 @@ def submit_result():
 
 @app.route('/admin/add_result')
 def add_result_page():
-    # Получаем список гонок для выпадающего списка
     races = execute_query("SELECT race_id, race_name FROM races ORDER BY race_date DESC", fetch=True)
 
-    # Получаем список пилотов и сразу находим ID их машин через команду
     drivers = execute_query("""
         SELECT d.driver_id, d.full_name, d.driver_number, c.car_id 
         FROM drivers d 
@@ -102,7 +94,6 @@ def circuits():
             flash(f'Трасса {name} добавлена в календарь!')
         return redirect(url_for('circuits'))
 
-    # Получаем список всех трасс для таблицы
     all_circuits = execute_query("SELECT * FROM circuits ORDER BY circuit_name", fetch=True)
     return render_template('circuits.html', circuits=all_circuits)
 
@@ -122,9 +113,7 @@ def manage_races():
             flash(f'Гонка {race_name} добавлена в календарь!')
         return redirect(url_for('manage_races'))
 
-    # Получаем список трасс для выпадающего списка в форме
     circuits = execute_query("SELECT circuit_id, circuit_name FROM circuits", fetch=True)
-    # Получаем список всех созданных гонок
     races = execute_query("""
         SELECT r.race_name, r.race_date, c.circuit_name 
         FROM races r 
@@ -134,7 +123,6 @@ def manage_races():
 
     return render_template('races.html', circuits=circuits, races=races)
 
-# --- 4. АДМИНКА (Управление командами и пилотами) ---
 @app.route('/admin/teams', methods=['GET', 'POST'])
 def manage_teams():
     if request.method == 'POST':
@@ -185,7 +173,6 @@ def race_results_history():
 
 @app.route('/driver/<int:driver_id>')
 def driver_stats(driver_id):
-    # 1. Получаем основную информацию о пилоте
     driver_info = execute_query("""
         SELECT d.*, t.team_name, c.model_name as car_model
         FROM drivers d
@@ -198,7 +185,6 @@ def driver_stats(driver_id):
         flash("Пилот не найден")
         return redirect(url_for('shop'))
 
-    # 2. Получаем историю гонок этого пилота
     race_history = execute_query("""
         SELECT r.race_name, r.race_date, rr.position, rr.points_earned
         FROM race_results rr
@@ -207,7 +193,6 @@ def driver_stats(driver_id):
         ORDER BY r.race_date DESC
     """, (driver_id,), fetch=True)
 
-    # 3. Считаем общую статистику
     summary = execute_query("""
         SELECT 
             COUNT(*) as total_starts,
@@ -226,5 +211,4 @@ def driver_stats(driver_id):
 
 
 if __name__ == '__main__':
-    # Изменил порт на 5001, как в твоем исходнике
     app.run(debug=True, port=5001)
