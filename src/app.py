@@ -1,8 +1,14 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from database import get_db_connection, execute_query
 from psycopg2.extras import RealDictCursor
 
-app = Flask(__name__)
+base_dir = os.path.abspath(os.path.dirname(__file__))
+root_dir = os.path.dirname(base_dir)
+app = Flask(
+    __name__,
+    template_folder=os.path.join(root_dir, 'templates')
+)
 app.secret_key = 'f1_secret_key'
 
 
