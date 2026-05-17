@@ -2,34 +2,34 @@
 {% block content %}
 <div class="row">
     <div class="col-md-4">
-        <h3 class="mb-4 text-danger"><i class="fa fa-plus-circle me-2"></i>Новая команда</h3>
+        <h3 class="mb-4 text-danger"><i class="fa fa-plus-circle me-2"></i>New Team</h3>
         <form method="POST" class="card p-4 shadow-sm">
             <div class="mb-3">
-                <label class="form-label text-secondary">Название команды</label>
-                <input type="text" name="name" class="form-control bg-dark text-white border-secondary" placeholder="например, Mercedes-AMG" required>
+                <label class="form-label text-secondary">Team's Name</label>
+                <input type="text" name="name" class="form-control bg-dark text-white border-secondary" placeholder="f.e. Mercedes-AMG" required>
             </div>
             <div class="mb-3">
-                <label class="form-label text-secondary">Штаб-квартира</label>
-                <input type="text" name="city" class="form-control bg-dark text-white border-secondary" placeholder="Брэкли, Великобритания">
+                <label class="form-label text-secondary">Headquarters</label>
+                <input type="text" name="city" class="form-control bg-dark text-white border-secondary" placeholder="London, UK">
             </div>
             <div class="mb-3">
-                <label class="form-label text-secondary">Потолок бюджета ($)</label>
+                <label class="form-label text-secondary">Budget ($)</label>
                 <input type="number" name="budget" class="form-control bg-dark text-white border-secondary" placeholder="135000000">
             </div>
-            <button type="submit" class="btn btn-danger w-100 fw-bold">Зарегистрировать</button>
+            <button type="submit" class="btn btn-danger w-100 fw-bold">Register</button>
         </form>
     </div>
 
     <div class="col-md-8">
-        <h3 class="mb-4">Кубок конструкторов</h3>
+        <h3 class="mb-4">Constructors Cup</h3>
         <div class="card shadow-sm">
             <div class="table-responsive">
                 <table class="table table-dark table-hover mb-0">
                     <thead class="table-light">
                         <tr>
-                            <th>Команда</th>
-                            <th>База</th>
-                            <th>Лимит бюджета</th>
+                            <th>Team</th>
+                            <th>HQ</th>
+                            <th>Budget Cap</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -2,14 +2,14 @@
 {% block content %}
 <div class="row">
     <div class="col-md-4">
-        <h3 class="mb-4 text-danger"><i class="fa fa-user-plus me-2"></i>Новый пилот</h3>
+        <h3 class="mb-4 text-danger"><i class="fa fa-user-plus me-2"></i>New Pilot</h3>
         <form method="POST" class="card p-4 shadow-sm">
             <div class="mb-3">
-                <label class="form-label text-secondary">Полное имя</label>
+                <label class="form-label text-secondary">Full Name</label>
                 <input type="text" name="name" class="form-control bg-dark text-white border-secondary" placeholder="Lando Norris" required>
             </div>
             <div class="mb-3">
-                <label class="form-label text-secondary">Команда</label>
+                <label class="form-label text-secondary">Team</label>
                 <select name="team_id" class="form-select bg-dark text-white border-secondary" required>
                     {% for t in teams %}
                     <option value="{{ t.team_id }}">{{ t.team_name }}</option>
@@ -18,29 +18,29 @@
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label class="form-label text-secondary">Номер (#)</label>
+                    <label class="form-label text-secondary">Number (#)</label>
                     <input type="number" name="number" class="form-control bg-dark text-white border-secondary" placeholder="4">
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label class="form-label text-secondary">Зарплата ($)</label>
+                    <label class="form-label text-secondary">Salary ($)</label>
                     <input type="number" name="salary" class="form-control bg-dark text-white border-secondary" placeholder="20000000">
                 </div>
             </div>
-            <button type="submit" class="btn btn-danger w-100 fw-bold">Добавить пилота</button>
+            <button type="submit" class="btn btn-danger w-100 fw-bold">Add pilot</button>
         </form>
     </div>
 
     <div class="col-md-8">
-        <h3 class="mb-4">Реестр лицензий FIA</h3>
+        <h3 class="mb-4">FIA Licences Registry</h3>
         <div class="card shadow-sm">
             <div class="table-responsive">
                 <table class="table table-dark table-hover mb-0">
                     <thead class="table-light">
                         <tr>
                             <th>#</th>
-                            <th>Пилот</th>
-                            <th>Команда</th>
-                            <th class="text-end">Зарплата</th>
+                            <th>Pilot</th>
+                            <th>Team</th>
+                            <th class="text-end">Salary</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -2,8 +2,8 @@
 {% block content %}
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="fw-bold"><i class="fa fa-stopwatch me-2 text-danger"></i>История заездов</h2>
-    <a href="/dashboard" class="btn btn-outline-light btn-sm">К аналитике</a>
+    <h2 class="fw-bold"><i class="fa fa-stopwatch me-2 text-danger"></i>Races History</h2>
+    <a href="/dashboard" class="btn btn-outline-light btn-sm">Analytics</a>
 </div>
 
 <div class="card shadow-sm border-0">
@@ -11,13 +11,13 @@
         <table class="table table-dark table-hover mb-0">
             <thead class="table-light">
                 <tr>
-                    <th>Дата</th>
-                    <th>Гран-при</th>
-                    <th>Пилот</th>
-                    <th>Команда</th>
-                    <th>Болид</th>
-                    <th class="text-center">Позиция</th>
-                    <th class="text-end">Очки</th>
+                    <th>Date</th>
+                    <th>Gran-Prix</th>
+                    <th>Pilot</th>
+                    <th>Team</th>
+                    <th>Car</th>
+                    <th class="text-center">Position</th>
+                    <th class="text-end">Points</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,7 +49,7 @@
                 {% endfor %}
                 {% if not results %}
                 <tr>
-                    <td colspan="7" class="text-center py-4 text-secondary">Данные о заездах пока отсутствуют</td>
+                    <td colspan="7" class="text-center py-4 text-secondary">No data yet</td>
                 </tr>
                 {% endif %}
             </tbody>

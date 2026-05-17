@@ -2,18 +2,18 @@
 {% block content %}
 <div class="row">
     <div class="col-md-4">
-        <h3 class="mb-4 text-danger"><i class="fa fa-calendar-plus me-2"></i>Запланировать гонку</h3>
+        <h3 class="mb-4 text-danger"><i class="fa fa-calendar-plus me-2"></i>Schedule a race</h3>
         <div class="card p-4 shadow-sm bg-dark text-white border-0">
             <form method="POST">
                 <div class="mb-3">
-                    <label class="form-label text-secondary small fw-bold">НАЗВАНИЕ ГРАН-ПРИ</label>
-                    <input type="text" name="race_name" class="form-control bg-dark text-white border-secondary" placeholder="например, Formula 1 Monaco Grand Prix" required>
+                    <label class="form-label text-secondary small fw-bold">GRAN-PRIX NAME</label>
+                    <input type="text" name="race_name" class="form-control bg-dark text-white border-secondary" placeholder="f.e. Formula 1 Monaco Grand Prix" required>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label text-secondary small fw-bold">ВЫБЕРИТЕ ТРАССУ</label>
+                    <label class="form-label text-secondary small fw-bold">CHOOSE THE CIRCUIT</label>
                     <select name="circuit_id" class="form-select bg-dark text-white border-secondary" required>
-                        <option value="" disabled selected>Выберите автодром...</option>
+                        <option value="" disabled selected>Choose circuit...</option>
                         {% for c in circuits %}
                         <option value="{{ c.circuit_id }}">{{ c.circuit_name }} ({{ c.country }})</option>
                         {% endfor %}
@@ -22,30 +22,30 @@
 
                 <div class="row">
                     <div class="col-md-7 mb-3">
-                        <label class="form-label text-secondary small fw-bold">ДАТА ПРОВЕДЕНИЯ</label>
+                        <label class="form-label text-secondary small fw-bold">RACE DATE</label>
                         <input type="date" name="race_date" class="form-control bg-dark text-white border-secondary" required>
                     </div>
                     <div class="col-md-5 mb-3">
-                        <label class="form-label text-secondary small fw-bold">КРУГОВ</label>
+                        <label class="form-label text-secondary small fw-bold">LAPS</label>
                         <input type="number" name="laps" class="form-control bg-dark text-white border-secondary" placeholder="53">
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-danger w-100 fw-bold mt-2">ДОБАВИТЬ В КАЛЕНДАРЬ</button>
+                <button type="submit" class="btn btn-danger w-100 fw-bold mt-2">ADD TO SCHEDULE</button>
             </form>
         </div>
     </div>
 
     <div class="col-md-8">
-        <h3 class="mb-4">Календарь чемпионата</h3>
+        <h3 class="mb-4">Championship Calendar</h3>
         <div class="card shadow-sm border-0 overflow-hidden">
             <table class="table table-dark table-hover mb-0 text-center">
                 <thead class="table-light">
                     <tr>
-                        <th>Дата</th>
-                        <th class="text-start">Гран-при</th>
-                        <th class="text-start">Автодром</th>
-                        <th>Круги</th>
+                        <th>Date</th>
+                        <th class="text-start">Gran-Prix</th>
+                        <th class="text-start">Circuit</th>
+                        <th>Laps</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,7 +62,7 @@
                     {% endfor %}
                     {% if not races %}
                     <tr>
-                        <td colspan="4" class="py-4 text-secondary italic">Гонки еще не запланированы. Используйте форму слева.</td>
+                        <td colspan="4" class="py-4 text-secondary italic">No races scheduled yet. Use the form.</td>
                     </tr>
                     {% endif %}
                 </tbody>

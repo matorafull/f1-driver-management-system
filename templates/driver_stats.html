@@ -5,8 +5,8 @@
     <div class="col-md-12">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/" class="text-danger">Главная</a></li>
-                <li class="breadcrumb-item active text-white" aria-current="page">Статистика пилота</li>
+                <li class="breadcrumb-item"><a href="/" class="text-danger">Main</a></li>
+                <li class="breadcrumb-item active text-white" aria-current="page">Driver's stats</li>
             </ol>
         </nav>
     </div>
@@ -22,11 +22,11 @@
 
                 <div class="border-top border-secondary pt-4 mt-2">
                     <div class="d-flex justify-content-between mb-2">
-                        <span class="text-secondary">Команда:</span>
+                        <span class="text-secondary">Team:</span>
                         <span class="fw-bold">{{ driver.team_name }}</span>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <span class="text-secondary">Болид:</span>
+                        <span class="text-secondary">Car Model:</span>
                         <span class="fw-bold">{{ driver.car_model }}</span>
                     </div>
                 </div>
@@ -38,25 +38,25 @@
         <div class="row mb-4">
             <div class="col-md-3">
                 <div class="card bg-danger text-white text-center p-3 shadow-sm border-0">
-                    <small class="text-uppercase opacity-75">Старты</small>
+                    <small class="text-uppercase opacity-75">Total Starts</small>
                     <h3 class="fw-bold mb-0">{{ summary.total_starts or 0 }}</h3>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="card bg-dark text-white text-center p-3 shadow-sm border-0 border-bottom border-warning border-4">
-                    <small class="text-uppercase text-secondary">Победы</small>
+                    <small class="text-uppercase text-secondary">Wins</small>
                     <h3 class="fw-bold mb-0 text-warning">{{ summary.wins or 0 }}</h3>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="card bg-dark text-white text-center p-3 shadow-sm border-0 border-bottom border-light border-4">
-                    <small class="text-uppercase text-secondary">Подиумы</small>
+                    <small class="text-uppercase text-secondary">Podiums</small>
                     <h3 class="fw-bold mb-0">{{ summary.podiums or 0 }}</h3>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="card bg-primary text-white text-center p-3 shadow-sm border-0">
-                    <small class="text-uppercase opacity-75">Всего очков</small>
+                    <small class="text-uppercase opacity-75">Total Points</small>
                     <h3 class="fw-bold mb-0">{{ summary.total_points or 0 }}</h3>
                 </div>
             </div>
@@ -64,16 +64,16 @@
 
         <div class="card bg-dark text-white shadow-sm border-0">
             <div class="card-header bg-secondary bg-opacity-25 py-3">
-                <h5 class="mb-0"><i class="fa fa-history me-2 text-danger"></i>История результатов</h5>
+                <h5 class="mb-0"><i class="fa fa-history me-2 text-danger"></i>Results History</h5>
             </div>
             <div class="table-responsive">
                 <table class="table table-dark table-hover mb-0">
                     <thead>
                         <tr class="text-secondary small text-uppercase">
-                            <th>Дата</th>
-                            <th>Гран-при</th>
-                            <th class="text-center">Позиция</th>
-                            <th class="text-end">Очки</th>
+                            <th>Date</th>
+                            <th>Gran-Prix</th>
+                            <th class="text-center">Position</th>
+                            <th class="text-end">Points</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,7 +93,7 @@
                         {% endfor %}
                         {% if not history %}
                         <tr>
-                            <td colspan="4" class="text-center py-5 text-secondary">Пилот еще не участвовал в гонках</td>
+                            <td colspan="4" class="text-center py-5 text-secondary">The pilot haven't participated in races yet</td>
                         </tr>
                         {% endif %}
                     </tbody>

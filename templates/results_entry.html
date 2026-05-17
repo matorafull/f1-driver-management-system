@@ -4,15 +4,15 @@
     <div class="col-md-6">
         <div class="card shadow-lg border-0 bg-dark text-white">
             <div class="card-header bg-danger text-white py-3 text-center">
-                <h4 class="mb-0 fw-bold">Внести результат заезда</h4>
+                <h4 class="mb-0 fw-bold">Enter Results</h4>
             </div>
             <div class="card-body p-4">
                 <form action="/submit_result" method="POST">
 
                     <div class="mb-3">
-                        <label class="form-label text-secondary small fw-bold">ВЫБЕРИТЕ ГРАН-ПРИ</label>
+                        <label class="form-label text-secondary small fw-bold">CHOOSE THE GRAN-PRIX</label>
                         <select name="race_id" class="form-select bg-dark text-white border-secondary" required>
-                            <option value="" disabled selected>Выберите гонку...</option>
+                            <option value="" disabled selected>Choose the race...</option>
                             {% for r in races %}
                             <option value="{{ r.race_id }}">{{ r.race_name }}</option>
                             {% endfor %}
@@ -20,9 +20,9 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label text-secondary small fw-bold">ПИЛОТ</label>
+                        <label class="form-label text-secondary small fw-bold">PILOT</label>
                         <select name="driver_id" id="driver_select" class="form-select bg-dark text-white border-secondary" required onchange="updateCarId()">
-                            <option value="" disabled selected>Выберите пилота...</option>
+                            <option value="" disabled selected>Choose the pilot...</option>
                             {% for d in drivers %}
                             <option value="{{ d.driver_id }}" data-car="{{ d.car_id }}">
                                 {{ d.full_name }} (#{{ d.driver_number }})
@@ -35,16 +35,16 @@
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label text-secondary small fw-bold">ПОЗИЦИЯ</label>
+                            <label class="form-label text-secondary small fw-bold">POSITION</label>
                             <input type="number" name="position" class="form-control bg-dark text-white border-secondary" min="1" max="20" placeholder="1" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label text-secondary small fw-bold">ОЧКИ</label>
+                            <label class="form-label text-secondary small fw-bold">POINTS</label>
                             <input type="number" name="points" class="form-control bg-dark text-white border-secondary" placeholder="25" required>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-danger btn-lg w-100 shadow fw-bold mt-3">СОХРАНИТЬ В БАЗУ</button>
+                    <button type="submit" class="btn btn-danger btn-lg w-100 shadow fw-bold mt-3">SAVE TO THE DATABASE</button>
                 </form>
             </div>
         </div>
